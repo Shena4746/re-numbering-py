@@ -1,2 +1,7 @@
 # ignore .history directory that is created by vscode extension
 /.history
+/.venv
+/.poetry.lock
+/**/__pycache__
+/**/.pytest_cache
+/.python-version
