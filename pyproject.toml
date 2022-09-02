@@ -6,10 +6,10 @@ authors = ["shane <https://github.com/Shena4746/python-templete>"]
 
 [tool.poetry.dependencies]
 python = "3.10.5"
+rich = "^12.5.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.6.0"
-nptyping = "^2.2.0"
 mypy = "^0.971"
 flake8 = "^4.0.1"
 isort = "^5.10.1"
