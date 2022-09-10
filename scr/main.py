@@ -101,5 +101,6 @@ def _re_numbering_all(
                 join_with=join_with,
                 overwrite=overwrite,
                 missing_page_number=missing_page_number,
+                add_last_space=add_last_space,
                 support=support,
             )
