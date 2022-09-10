@@ -47,14 +47,11 @@ from main import _re_numbering, _re_numbering_all
 @click.option(
     "-m", "--missing", type=bool, is_flag=True, help="point out rows with no page number at the end of the process."
 )
+@click.option(
+    "-b", "--blank", type=bool, is_flag=True, help="add blank line at the end of the text if there is not the one."
+)
 def renumbering(
-    path: str | Path,
-    dirout: str | None,
-    pre: str,
-    suf: str,
-    join: str,
-    overwrite: bool,
-    missing: bool,
+    path: str | Path, dirout: str | None, pre: str, suf: str, join: str, overwrite: bool, missing: bool, blank: bool
 ) -> None:
     path = Path(path)
     if path.is_file():
@@ -66,6 +63,7 @@ def renumbering(
             join_with=join,
             overwrite=overwrite,
             missing_page_number=missing,
+            add_last_space=blank,
         )
     elif path.is_dir():
         _re_numbering_all(
@@ -76,6 +74,7 @@ def renumbering(
             join_with=join,
             overwrite=overwrite,
             missing_page_number=missing,
+            add_last_space=blank,
         )
 
 

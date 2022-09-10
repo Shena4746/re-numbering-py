@@ -35,6 +35,10 @@ def point_out_missing_page_number(lines: Paged_Text_Lines):
         print(out)
 
 
+def add_trailing_space(text: str) -> str:
+    return text + "\n" if text.split(sep="\n")[-1] != "" else text
+
+
 def _re_numbering(
     file: str | Path,
     dir_out: Optional[str | Path],
@@ -43,20 +47,22 @@ def _re_numbering(
     join_with: str = "",
     overwrite: bool = False,
     missing_page_number: bool = False,
-    support: list[str] = [".txt"],
+    add_last_space: bool = False,
+    support: list[str] = [".txt", ".yaml", "yml"],
 ) -> Path:
     file = Path(file)
     if not file.is_file():
         raise ValueError(f"{file} is not a file.")
     if file.suffix not in support:
-        raise ValueError(f"{file} is not with supported extension.")
+        raise ValueError(f"{file} is not a supported extension.")
     with open(str(file)) as f:
         text: str = f.read()
         re_numberer = Re_Numbering(Paged_Text_Lines(text))
         lines_out: Paged_Text_Lines = re_numberer.re_numbering()
         if missing_page_number:
             point_out_missing_page_number(lines_out)
-        text_out: str = lines_out.to_text()
+        # text_out: str = lines_out.to_text()
+        text_out: str = add_trailing_space(lines_out.to_text()) if add_last_space else lines_out.to_text()
         # save
         dir_out = file.parent if dir_out is None else Path(dir_out)
         saved_file, success = save_text(
@@ -79,6 +85,7 @@ def _re_numbering_all(
     join_with: str = "",
     overwrite: bool = False,
     missing_page_number: bool = False,
+    add_last_space: bool = False,
     support: list[str] = [".txt"],
 ) -> None:
     dir = Path(dir)
