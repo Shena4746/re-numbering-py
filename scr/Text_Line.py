@@ -87,7 +87,7 @@ class Paged_Text_Line(Text_Line):
     pat_page: Final[Pattern] = re.compile(f"(?P<{page_key}>\\s?[0-9]+)$")
     pat_roman_page: Final[Pattern] = re.compile(f"(?=\\s|^)\\s?(?P<{roman_page_key}>[ixv]+|[IXV]+)$")
     pat_page_order: Final[Pattern] = re.compile(
-        f"(?P<{page_key_order[0]}>\\-?\\d+)\\s*?->\\s*?(?P<{page_key_order[1]}>\\d+)$"
+        f"\\s(?P<{page_key_order[0]}>\\-?\\d+)\\s*?->\\s*?(?P<{page_key_order[1]}>\\d+)$"
     )
 
     def __init__(
@@ -200,5 +200,5 @@ class Paged_Text_Line(Text_Line):
         # matches might be empty. it happens, for instance, when page number is directly named in constructor.
         if match is not None:
             text_end: int = match.start(key)
-            return self.text[:text_end].strip()
+            return self.text[:text_end].rstrip()
         return self.text

@@ -98,6 +98,11 @@ def text_page_order_ng() -> list[str]:
     ]
 
 
+@pytest.fixture
+def text_get_text_without_page() -> list[tuple[str, str]]:
+    return [("text1 1->5", "text1"), ("text1 1", "text1")]
+
+
 def test_ptl_separates_arabic_pages(text_with_arabic_page):
     for text, res_text, res_page in text_with_arabic_page:
         ptl = Paged_Text_Line(idx=-1, text=text)
@@ -124,4 +129,11 @@ def test_page_order_ng(text_page_order_ng):
     for text in text_page_order_ng:
         ptl = Paged_Text_Line(text=text)
         print(ptl)
-        assert not ptl.has_page_order()
+        assert not ptl.page_order.set
+
+
+def test_get_text_without_page(text_get_text_without_page):
+    for text, ans in text_get_text_without_page:
+        ptl = Paged_Text_Line(text=text)
+        print(ptl)
+        assert ptl.text == ans

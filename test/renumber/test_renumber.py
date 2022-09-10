@@ -15,8 +15,8 @@ from Text_Lines import Paged_Text_Lines  # type: ignore
 @pytest.fixture
 def data_get_new_numbers() -> list[tuple[list[str], list[Optional[int]]]]:
     return [
-        (["1", "2->5", "3", "4->10", "5"], [1, 5, 6, 10, 11]),
-        (["1", "2->5", "", "4->10", "5"], [1, 5, None, 10, 11]),
+        (["hoge 1", "hoge 2->5", "hoge 3", "hoge 4->10", "hoge 5"], [1, 5, 6, 10, 11]),
+        (["hoge 1", "hoge 2->5", "", "hoge 4->10", "hoge 5"], [1, 5, None, 10, 11]),
     ]
 
 
