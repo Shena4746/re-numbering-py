@@ -39,6 +39,8 @@ Hilbert Spaces
 
 ## Usage
 
+### Command
+
 Simply run the following.
 
 ```bash
@@ -50,6 +52,59 @@ For detail, see help.
 
 ```bash
 python ./scr/renumbering.py --help
+```
+
+### Rule about `->`
+
+There can be spaces around `->`.
+
+```txt:
+# ok
+sample 1 -> 4
+sample 1->4
+sample 1-> 4
+sample 1 ->4
+sample -3  ->  4
+```
+
+There must be space before mapping description.
+
+```txt: ng
+# ng
+sample1 -> 4
+```
+
+Mapping symbol must be exactly `->`.
+
+```txt: ng
+# ng
+sample 1 --> 4
+sample 1 ->> 4
+sample 1 >> 4
+```
+
+Re-numbering zone can be limited by placing a trivial mapping `x -> x`:
+
+```txt:before
+# before
+§1. Elementary Properties and Examples 1->8
+§2. Orthogonality 
+§3. The Riesz Representation Theorem 10
+§4. Orthonormal Sets of Vectors and Bases 20->20
+§5. Isomorphic Hilbert Spaces and the Fourier Transform for the Circle 30
+§6. The Direct Sum of Hilbert Spaces 40
+```
+
+The above example re-numbers the first 3 lines only.
+
+```txt:after
+# after
+§1. Elementary Properties and Examples 8
+§2. Orthogonality 
+§3. The Riesz Representation Theorem 17
+§4. Orthonormal Sets of Vectors and Bases 20
+§5. Isomorphic Hilbert Spaces and the Fourier Transform for the Circle 30
+§6. The Direct Sum of Hilbert Spaces 40
 ```
 
 ## Install
